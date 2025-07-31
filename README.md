@@ -35,10 +35,3 @@ This project demonstrates exploratory data analysis of global COVID‑19 data us
 ## 📌 Dataset Source
 
 - [Our World In Data – COVID-19](https://ourworldindata.org/covid-cases)
-
-## 🧑‍💻 Interview Prep Tip
-
-This project highlights skills in:
-- SQL Joins, Window Functions, Aggregations
-- Time-series and health data analysis
-- Data visualization using SQL & Python
