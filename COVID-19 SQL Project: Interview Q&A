@@ -1,0 +1,66 @@
+1. What was your objective behind the COVID-19 SQL project?
+The objective was to explore and analyze the impact of COVID-19 across the world using SQL. I aimed to extract meaningful insights from large datasets, such as death rates, vaccination progress, and daily case trends. This helped me strengthen my SQL skills and data interpretation ability.
+
+2. How did you obtain and clean the dataset?
+I used the Our World in Data (OWID) COVID-19 dataset. In Colab, I loaded the dataset using Pandas, selected only the relevant columns, and removed rows with missing or irrelevant values before loading it into a SQLite database.
+
+3. What kind of insights were you able to derive?
+Top countries with the highest death rate
+Countries with highest vaccination coverage
+7-day rolling average trends of daily cases
+Countries with the highest total cases and deaths
+Trends in India's and USA’s case data over time
+
+🧠 SQL Concepts
+4. How did you calculate the death rate using SQL?
+I used the formula:
+ROUND((MAX(total_deaths) * 100.0) / MAX(total_cases), 2)
+This calculates the death rate as a percentage of total reported cases.
+
+5. Can you explain how a window function works?
+A window function performs calculations across a set of rows related to the current row without collapsing rows like GROUP BY. I used it to compute the 7-day rolling average of new cases like this:
+AVG(new_cases) OVER (ORDER BY date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)
+
+6. What is the difference between GROUP BY and PARTITION BY?
+GROUP BY aggregates rows into one per group, reducing the result size.
+PARTITION BY is used with window functions to group rows logically while keeping all rows in the output.
+
+7. Why did you use MAX() in some of your queries?
+I used MAX() to get the latest available numbers per country, such as total cases or deaths as of the most recent date.
+
+8. How did you handle missing or null values?
+I filtered them using WHERE column IS NOT NULL in SQL and avoided using them in calculations. In some cases, I cleaned or dropped null rows in Pandas before importing into SQLite.
+
+⚙️ Performance & Optimization
+9. What are some ways to optimize your queries?
+Use indexes on frequently filtered columns like location or date
+Avoid SELECT * and select only necessary columns
+Use subqueries or Common Table Expressions (CTEs) for reusability
+
+10. Would indexing help in your case if this were a live system?
+Yes. Indexing columns like location and date would significantly speed up queries in a live dashboard or API-based reporting system.
+
+📊 Data Interpretation
+11. Which countries had the highest death rate and why might that be?
+Countries like Yemen, Peru, and Bulgaria showed high death rates. This could be due to delayed healthcare access, under-reporting of mild cases, or poor public health infrastructure.
+
+12. What trends did you observe about vaccination data?
+High-income countries such as UAE, Portugal, and Israel had high vaccination rates. Developing countries had slower vaccine rollouts, highlighting global inequality.
+
+13. How did the rolling average help your analysis?
+It helped smooth out daily fluctuations and reporting anomalies, making long-term trends easier to identify and interpret.
+
+📈 Visualization Insight
+14. Why did you use a rolling average instead of raw daily cases?
+Rolling averages reduce noise and help visualize consistent patterns. They are especially useful when data has irregular reporting days like weekends or holidays.
+
+15. Which plot gave you the clearest insight and why?
+The bar chart of death rate by country clearly highlighted critical zones. The 7-day rolling average line graph also provided a good understanding of outbreak waves.
+
+🌐 Real-World Relevance
+16. How would a health ministry benefit from this analysis?
+A health ministry could use this to monitor which areas need urgent medical resources, track the effectiveness of vaccination campaigns, and predict upcoming infection waves.
+
+17. How would you convert this into a dashboard for business use?
+I would use Power BI or Tableau to create interactive dashboards that include filters for countries and date ranges, KPI cards (total cases, deaths), and visualizations like bar charts, line graphs, and maps.
+
